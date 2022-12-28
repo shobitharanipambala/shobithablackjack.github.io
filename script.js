@@ -3,20 +3,41 @@
  * @param {*} asArray - which decides whether to return as an Array or as an Object
  * @returns - packArr if asArray is true, else packObj
  */
+
  function buildCards(asArray=true){
     const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
     const values = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King'];
-    const packArr = []
-    const packObj = {}
+    const packArr = [ ];
+    const packObj = { };
 
     // write your code here
+    
+    
+        
+        for (var i = 0; i < suits.lenght; i++){
+            for (var j = 0; j < values.lenght; j++){
+                packArr.push( values[j]+" of "+ suits[i] );
+    
+            }
+            return( packArr );
+        }
+        var l = 0;
+        for (var m = 0; m < 4;m++){
+            for(var k = 0; k < (packArr.length)/4; k++){
+                packObj[packArr[l]] = k + 1;
+                l++;
+            }
+            return( packObj );
 
-
-    if(!asArray){
+            
+       
+     }
+     if (!asArray){
         return packObj;
-    }
-    return packArr;
-}
+     }
+     return packArr;
+     }
+
 
 /**
  * Define Deck class
@@ -238,3 +259,4 @@ function hit() {
  * Initial Deal
  */
 initialDeal();
+ 
