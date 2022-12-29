@@ -11,33 +11,29 @@
     const packObj = { };
 
     // write your code here
-    
+    for (var i = 0; i < suits.length; i++){
+        for (var j = 0; j < values.length; j++){
+            packArr.push( values[j]+" of "+ suits[i] );
+
+        }
+        return( packArr );
+    }
+    var l = 0;
+    for (var m = 0; m < 4;m++){
+        for(var k = 0; k < (packArr.length)/4; k++){
+            packObj[packArr[l]] = k + 1;
+            l++;
+        }
+        return( packObj );
+    }
+    if(!asArray){
+        return packObj;
+    }
+    return packArr;
+ }
     
         
-        for (var i = 0; i < suits.lenght; i++){
-            for (var j = 0; j < values.lenght; j++){
-                packArr.push( values[j]+" of "+ suits[i] );
-    
-            }
-            return( packArr );
-        }
-        var l = 0;
-        for (var m = 0; m < 4;m++){
-            for(var k = 0; k < (packArr.length)/4; k++){
-                packObj[packArr[l]] = k + 1;
-                l++;
-            }
-            return( packObj );
-
-            
-       
-     }
-     if (!asArray){
-        return packObj;
-     }
-     return packArr;
-     }
-
+      
 
 /**
  * Define Deck class
