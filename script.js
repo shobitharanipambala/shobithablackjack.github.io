@@ -3,12 +3,11 @@
  * @param {*} asArray - which decides whether to return as an Array or as an Object
  * @returns - packArr if asArray is true, else packObj
  */
-
  function buildCards(asArray=true){
     const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
     const values = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King'];
-    const packArr = [ ];
-    const packObj = { };
+    const packArr = []
+    const packObj = {}
 
     // write your code here
     for (var i = 0; i < suits.length; i++){
@@ -31,9 +30,9 @@
     }
     return packArr;
  }
-    
-   // do not know ee     
-      
+
+ 
+ 
 
 /**
  * Define Deck class
@@ -53,9 +52,7 @@ class Deck {
     reset() {
         // write your code here
         this.deck=[];
-        this.deck=buildCards(!0);
-        
-
+        this.deck=buildCards(true);
 
     } //End of reset()
 
@@ -70,6 +67,7 @@ class Deck {
             this.deck[suits]=this.deck[suits];
             this.deck[suits]=values;
         }
+        
     } //End of shuffle()
 
     /**
@@ -78,9 +76,7 @@ class Deck {
      */
     deal() {
         // write your code here
-    
         return this.deck.pop();
-
     } //End of deal()
 
     /**
@@ -117,12 +113,14 @@ class Card {
         const cardValues = buildCards(false);
 
         this.value = cardValues[card];
-        this.suit = card.substring(card.indexOf(" of ") + 4);
+        this.suit = card.substring(card.indexOf ("of")+ 4);
         this.placeHolder = null;
         this.flipped = false;
 
-        var suits = { 'Hearts': 0, 'Diamonds': 13, 'Clubs': 26, 'Spades': 39 }
-        this.position = suits[this.suit] + this.value; //Position in a sorted deck
+        //var suits =  'Hearts': 0, 'Diamonds': 13, 'Clubs': 26, 'Spades': 39 }
+        this.position = {
+            'Hearts': 0, 'Diamonds': 13, 'Clubs': 26, 'Spades': 39
+                     }[this.suit] + this.value; //Position in a sorted deck
     } //End of Constructor
 
     /**
@@ -130,31 +128,49 @@ class Card {
      * @param {*} placeHolder 
      * @param {*} flipped 
      */
-    displayCard(placeHolder, flipped = true) {
-        this.placeHolder = document.getElementById(placeHolder);
+    displayCard(card, cardValues = true) {
+        this.placeHolder = document.getElementById(card);
         this.placeHolder.classList.add("card");
-        this.flipped = flipped;
-        if (flipped) {
-            this.placeHolder.style.backgroundPosition = -150 * this.position + "px";
-        } else {
-            this.placeHolder.style.backgroundPosition = "0px";
+        this.flipped = cardValues;
+        this.placeHolder.style.backgroundPosition = cardValues?-150 * this.position + "px" : "0px" ;
+        //if (flipped) {
+           // this.placeHolder.style.backgroundPosition = -150 * this.position + "px";
+        //} else {       
+             //this.placeHolder.style.backgroundPosition = "0px";
+        //}
+    }
+    flip(){
+        if(this.flipped){
+            this.placeHolder.style.backgroundPosition= " 0px";
+            this.flipped = false ;
         }
-    } // End of displayCard
-
-    /**
-     * Method to flip the card
-     */
-    flip() {
-        if (this.flipped) {
-            this.placeHolder.style.backgroundPosition = "0px";
-            this.flipped = false;
-        } else {
-            this.placeHolder.style.backgroundPosition = -150 * this.position + "px";
-            this.flipped = true;
+        else{
+            this.placeHolder.style.background =  -150 * this.position + "px";;
+            this.flipped = true ;
         }
-    } //End of flip()
+    }
+}
+    //     if (flipped) {
+    //         this.placeHolder.style.backgroundPosition = -150 * this.position + "px";
+    //     } else {
+    //         this.placeHolder.style.backgroundPosition = "0px";
+    //     }
+    // } // End of displayCard
 
-} //End of Card class
+    // /**
+    //  * Method to flip the card
+    //  */
+    // flip() {
+    //     if (this.flipped) {
+    //         this.placeHolder.style.backgroundPosition = "0px";
+    //         this.flipped = false;
+    //     } else {
+    //         this.placeHolder.style.backgroundPosition = -150 * this.position + "px";
+    //         this.flipped = true;
+    //     }
+    // } //End of flip()
+
+//} //End of Card class
 
 /**
  * Functions which help Play the BlackJack game 
@@ -177,11 +193,34 @@ function initialDeal() {
     // Deal(Instantiate) 2 Dealer cards and 2 Player cards
 
     // write your code here
-
-
+    card1 = new Card(deck.deal());
+    card2 = new Card(deck.deal());
+    playerCard1=new Card(deck.deal());
+    playerCard2=new Card(deck.deal());
+    card1.displayCard("card1",true );
+    card2.displayCard("card2",false );
+    playerCard1.displayCard("playerCard1",true);
+    playerCard2.displayCard("playerCard2",true);
+    card1.value=10<card1.value,10 +card1.value;
+    card2.value=10<card2.value,10 + card2.value;
+    playerCard1.value = 10 < playerCard1.value, 10 + playerCard1.value;
+    playerCard2.value = 10 < playerCard2.value, 10 + playerCard2.value;
+    
     // Open the board with 2 Dealer cards (one Dealer card is closed) and 2 Player cards (both open)
 
     // write your code here
+    
+    21===(playerTotal=playerCard1.value+playerCard2.value)&&cuteAlert({
+        type:"success",
+        title:"Superb!!!",
+        message:"Blackjacked !!!",
+        buttonText:"Wohoo !!!",
+        img:"success.svg"
+    }).then(()=>{
+        location.reload()
+    })}   
+    
+
 
 
     // Setting face card values to 10
@@ -205,7 +244,7 @@ function initialDeal() {
 
     // write your code here
 
-} //End of deal()
+//End of deal()
 
 /**
  * If the Player stands with his cards - the Dealer has to flip his closed card and determine who wins the game
@@ -214,12 +253,27 @@ function stand() {
     // flip Dealer cards and compare
 
     // write your code here
+    card2.flip();
+    dealerTotal = card1.value + card2.value;
+    dealerTotal=card1.value+card2.value;
+        
 
 
     // Checking Dealer and Player score - to give the result using cuteAlerts (just like the alert in initialDeal function)
 
     // write your code here
-
+    (playerTotal>=dealerTotal?cuteAlert({
+        type:"success",
+        title:"Congratualtions !!!",
+        message:"You won the Game",
+        buttonText:"Yayy !",img:"success.svg"
+}):cuteAlert({
+        type:"error",
+        title:"Oh No !!!",message:
+        "Dealer won the Game",buttonText:"Ok :(",
+        img:"error.svg"
+    })).then(()=>{location.reload()
+    })
 }
 
 // Variable to track the extra cards dealed
@@ -229,11 +283,33 @@ let extraCnt = 0;
  * function which deals extra playercards - Max. 2 cards
  */
 function hit() {
-    let dealButton = document.getElementById("deal");
+    let placeHolder = document.getElementById("deal");
 
     // Dealing the extra cards that the player requests
 
     // write your code here
+    playerCard3 = new Card(deck.deal());
+    playerCard4 = new Card(deck.deal());
+    if(0 === extraCnt){
+        playerCard3.displayCard("playerCard3",true);
+        playerCard3.value = 10 < playerCard3.value ? 10 : playerCard3.value;
+        playerTotal += playerCard3.value
+    }
+    else if(1 === extraCnt){
+        playerCard4.displayCard("playerCard4",true);
+        playerCard4.value=10<playerCard4.value?10:playerCard4.value;
+        playerTotal += playerCard4.value
+    }
+    else{
+        card.style.display="none"
+        cuteAlert({
+            type: "warning",
+            title: "Sorry...",
+            message: "Max. Cards dealed",
+            buttonText: "OK",
+            img:"warning.svg"
+        })
+    }
 
 
     // Dealing new cards 
@@ -257,14 +333,34 @@ function hit() {
     // Checking the total of the player cards before dealing new cards
         // cuteAlert - Player looses the game - as score is more than 21
         // cuteAlert - Player wins with BlackJack !!!
-
+    if(21<playerTotal){
+        cuteAlert({
+            type: "error",
+            title:"Busted...",
+            message: "You lost the game",
+            buttonText:"OK",
+            img:"error.svg"
+            }).then(()=>{
+                location.reload()
+            });
+           card.display="none"
+        }
+        else{
+           21 ===playerTotal&&cuteAlert({
+            type: "success",
+            title: "superb!!!",
+            message: "Blackjacked!!!",
+            buttonText: "Wohoo!!!",
+            img:"success.svg"
+        }).then(()=>{
+            location.reload()
+        });
 
     // Increment extra card count
     extraCnt++;
 }
- 
+}
 /**
  * Initial Deal
  */
 initialDeal();
- 
