@@ -17,11 +17,11 @@
         }
         return( packArr );
     }
-    var l = 0;
-    for (var m = 0; m < 4;m++){
-        for(var k = 0; k < (packArr.length)/4; k++){
-            packObj[packArr[l]] = k + 1;
-            l++;
+    var a = 0;
+    for (var b = 0; b < 4;b++){
+        for(var c = 0; c < (packArr.length)/4; c++){
+            packObj[packArr[l]] = c + 1;
+            a ++;
         }
         return( packObj );
     }
@@ -141,11 +141,11 @@ class Card {
     }
     flip(){
         if(this.flipped){
-            this.placeHolder.style.backgroundPosition= " 0px";
+            this.placeHolder.style.background =  -150 * this.position + "px";;
             this.flipped = false ;
         }
         else{
-            this.placeHolder.style.background =  -150 * this.position + "px";;
+            this.placeHolder.style.backgroundPosition= " 0px";
             this.flipped = true ;
         }
     }
@@ -203,8 +203,8 @@ function initialDeal() {
     playerCard2.displayCard("playerCard2",true);
     card1.value=10<card1.value,10 +card1.value;
     card2.value=10<card2.value,10 + card2.value;
-    playerCard1.value = 10 < playerCard1.value, 10 + playerCard1.value;
-    playerCard2.value = 10 < playerCard2.value, 10 + playerCard2.value;
+    playerCard1.value = 10 < playerCard1.value + playerCard1.value;
+    playerCard2.value = 10 < playerCard2.value + playerCard2.value;
     
     // Open the board with 2 Dealer cards (one Dealer card is closed) and 2 Player cards (both open)
 
@@ -283,7 +283,7 @@ let extraCnt = 0;
  * function which deals extra playercards - Max. 2 cards
  */
 function hit() {
-    let placeHolder = document.getElementById("deal");
+    let = document.getElementById("deal");
 
     // Dealing the extra cards that the player requests
 
